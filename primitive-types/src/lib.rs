@@ -17,6 +17,7 @@
 use core::convert::TryFrom;
 use fixed_hash::{construct_fixed_hash, impl_fixed_hash_conversions};
 use uint::{construct_uint, uint_full_mul_reg};
+use rand::{Rand, Rng};
 
 /// Error type for conversion.
 #[derive(Debug, PartialEq, Eq)]
@@ -209,5 +210,13 @@ impl<'a> TryFrom<&'a U512> for U256 {
 		ret[2] = arr[2];
 		ret[3] = arr[3];
 		Ok(U256(ret))
+	}
+}
+
+impl Rand for U256 {
+	#[inline]
+	fn rand<R: Rng>(rng: &mut R) -> U256 {
+		U256::from(rng.next_u64() << 196) ^ U256::from(rng.next_u64() << 128) ^ U256::from(rng.next_u64() << 64) ^
+			U256::from(rng.next_u64())
 	}
 }

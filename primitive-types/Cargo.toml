@@ -8,6 +8,7 @@ description = "Primitive types shared by Ethereum and Substrate"
 edition = "2018"
 
 [dependencies]
+rand = "0.3"
 fixed-hash = { version = "0.5", path = "../fixed-hash", default-features = false }
 uint = { version = "0.8.1", path = "../uint", default-features = false }
 impl-serde = { version = "0.3.0", path = "impls/serde", default-features = false, optional = true }
